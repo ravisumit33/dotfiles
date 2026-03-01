@@ -1,0 +1,21 @@
+local WORK_DIRNAME = "{{ .work.dirname }}"
+
+return {
+  {
+    "stevearc/conform.nvim",
+    opts = function(_, opts)
+      opts.formatters.prettier = {
+        condition = function(_, ctx)
+          local cwd = vim.fn.getcwd()
+
+          -- Match /home/.../work/ or /Users/.../work/
+          if cwd:match("/" .. WORK_DIRNAME .. "/") then
+            return false
+          end
+
+          return true
+        end,
+      }
+    end,
+  },
+}

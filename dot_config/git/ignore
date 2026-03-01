@@ -1,0 +1,10 @@
+tags*
+jsconfig.json
+.cache/
+.vim/
+.vscode/
+compile_commands.json
+.ignore
+.neoconf.json
+.lazy.lua
+.clangd

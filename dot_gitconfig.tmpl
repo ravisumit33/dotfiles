@@ -1,0 +1,8 @@
+[user]
+    name = Sumit Kumar
+    email = ravi.sumit33@gmail.com
+
+{{ $workPath := printf "%s/%s" .chezmoi.homeDir .work.dirname }}
+
+[includeIf "gitdir:{{$workPath}}/"]
+    path = ~/.gitconfig-work
