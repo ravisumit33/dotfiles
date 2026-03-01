@@ -1,0 +1,9 @@
+[tools]
+chezmoi = "latest"
+fd = "latest"
+fzf = "latest"
+neovim = "latest"
+node = "22"
+python = "3.10"
+ripgrep = "latest"
+tmux = "latest"
