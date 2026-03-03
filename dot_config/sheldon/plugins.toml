@@ -28,6 +28,9 @@ github = "MichaelAquilina/zsh-you-should-use"
 [plugins.zsh-bat]
 github = "fdellwing/zsh-bat"
 
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 apply = ["defer"]
