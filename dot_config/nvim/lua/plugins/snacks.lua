@@ -1,6 +1,36 @@
 return {
   "folke/snacks.nvim",
   opts = {
+    styles = {
+      -- Trackpad swipes are rarely perfectly vertical, causing unwanted
+      -- horizontal scroll. Override wrap=true on dashboard and terminal
+      -- so only vertical scrolling happens. For terminal, Neovim resets
+      -- wrap=false when a terminal channel is opened (termopen/jobstart),
+      -- so wo alone doesn't stick on first creation — we re-apply it in
+      -- on_win via vim.schedule.
+      dashboard = {
+        wo = { wrap = true },
+      },
+      terminal = {
+        wo = { wrap = true },
+        on_win = function(self)
+          vim.schedule(function()
+            if self:valid() then
+              vim.api.nvim_set_option_value("wrap", true, { scope = "local", win = self.win })
+            end
+          end)
+        end,
+        keys = {
+          gw = {
+            function()
+              vim.wo.wrap = not vim.wo.wrap
+            end,
+            desc = "Toggle wrap",
+            mode = "n",
+          },
+        },
+      },
+    },
     picker = {
       sources = {
         explorer = {
