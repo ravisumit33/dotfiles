@@ -39,3 +39,10 @@ chezmoi cd                 # cd into this source directory
 ## Neovim Plugin Architecture
 
 Custom plugins live in `dot_config/nvim/lua/plugins/`. LazyVim extras are declared in `dot_config/nvim/lazyvim.json`. A custom agent terminal utility (`dot_config/nvim/lua/utils/agent.lua`) creates persistent tmux sessions per project.
+
+## Neovim Keybinding Rules
+
+When adding or modifying keybindings, always check for conflicts first:
+1. Scan all files in `dot_config/nvim/lua/plugins/` and `dot_config/nvim/lua/config/` for existing `keys` and `vim.keymap.set` definitions.
+2. Check LazyVim default keymaps — this config uses LazyVim, so many `<leader>` combos are already taken (see lazyvim.org/keymaps).
+3. Pick keys that are semantically related to nearby bindings (e.g., `<C-.>` next to `<C-,>` for related functionality).
