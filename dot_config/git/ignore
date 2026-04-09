@@ -8,3 +8,5 @@ compile_commands.json
 .neoconf.json
 .lazy.lua
 .clangd
+
+**/.claude/settings.local.json
