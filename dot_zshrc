@@ -103,7 +103,9 @@ fi
 source "$HOME/.fzf.zsh"
 
 
-export VCPKG_ROOT="$HOME/OpenSource/vcpkg"
+if [[ -d "$HOME/OpenSource/vcpkg" ]]; then
+  export VCPKG_ROOT="$HOME/OpenSource/vcpkg"
+fi
 
 if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
@@ -117,6 +119,7 @@ if command -v starship &> /dev/null; then
   eval "$(starship init zsh)"
 fi
 
-export WASMTIME_HOME="$HOME/.wasmtime"
-
-export PATH="$WASMTIME_HOME/bin:$PATH"
+if [[ -d "$HOME/.wasmtime" ]]; then
+  export WASMTIME_HOME="$HOME/.wasmtime"
+  export PATH="$WASMTIME_HOME/bin:$PATH"
+fi
