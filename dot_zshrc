@@ -119,7 +119,6 @@ if command -v starship &> /dev/null; then
   eval "$(starship init zsh)"
 fi
 
-if [[ -d "$HOME/.wasmtime" ]]; then
-  export WASMTIME_HOME="$HOME/.wasmtime"
-  export PATH="$WASMTIME_HOME/bin:$PATH"
+if [[ -n "$VIRTUAL_ENV" && ":$PATH:" != *":$VIRTUAL_ENV/bin:"* ]]; then
+  export PATH="$VIRTUAL_ENV/bin:$PATH"
 fi
