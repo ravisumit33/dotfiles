@@ -1,3 +1,6 @@
 [user]
     name = Sumit Kumar
     email = {{ .work.email }}
+
+[core]
+    sshCommand = "ssh -i ~/.ssh/{{ .work.sshKey }} -o IdentitiesOnly=yes -o IdentityAgent=none"
