@@ -1,20 +1,38 @@
+# =============================================================================
+# Environment
+# =============================================================================
+
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# oh-my-zsh normally initialises the zsh completion system (compinit), which defines
-# compdef. Since we don't use oh-my-zsh but use its git plugin for aliases, a no-op stub is enough. 
+[[ -d "$HOME/OpenSource/vcpkg" ]] && export VCPKG_ROOT="$HOME/OpenSource/vcpkg"
+[[ -n "$VIRTUAL_ENV" && ":$PATH:" != *":$VIRTUAL_ENV/bin:"* ]] && export PATH="$VIRTUAL_ENV/bin:$PATH"
+
+
+# =============================================================================
+# Completions
+# =============================================================================
+
+# oh-my-zsh normally initialises the zsh completion system (compinit), which
+# defines compdef. Since we load only its git plugin via sheldon without the
+# framework, compdef is never defined and the plugin throws "command not found".
+# A no-op stub is enough — we only need the aliases, not the completion bindings.
 compdef() {}
 
-if [[ ! -f "$HOME/.fzf.zsh" ]] || [[ "$(which fzf)" -nt "$HOME/.fzf.zsh" ]]; then
-  fzf --zsh > "$HOME/.fzf.zsh"
-fi
-source "$HOME/.fzf.zsh"
+
+# =============================================================================
+# Plugins
+# =============================================================================
+
+command -v sheldon &>/dev/null && eval "$(sheldon source)" # sheldon already caches
 
 
-if [[ -d "$HOME/OpenSource/vcpkg" ]]; then
-  export VCPKG_ROOT="$HOME/OpenSource/vcpkg"
-fi
+# =============================================================================
+# Tool integrations
+# =============================================================================
 
+# Cache eval output so we avoid a subprocess fork on every shell start.
+# Cache is invalidated automatically when the binary changes.
 _cached_eval() {
   local cache="$HOME/.cache/zsh/${1:t}.zsh"
   [[ ! -f $cache || "$(command -v $1)" -nt $cache ]] && { mkdir -p "${cache:h}"; "$@" > $cache }
@@ -22,9 +40,15 @@ _cached_eval() {
 }
 
 command -v mise &>/dev/null && _cached_eval mise activate zsh
-command -v sheldon &>/dev/null && eval "$(sheldon source)" # Sheldon already caches
-command -v starship &>/dev/null && _cached_eval starship init zsh
 
-if [[ -n "$VIRTUAL_ENV" && ":$PATH:" != *":$VIRTUAL_ENV/bin:"* ]]; then
-  export PATH="$VIRTUAL_ENV/bin:$PATH"
+if [[ ! -f "$HOME/.fzf.zsh" || "$(command -v fzf)" -nt "$HOME/.fzf.zsh" ]]; then
+  fzf --zsh > "$HOME/.fzf.zsh"
 fi
+source "$HOME/.fzf.zsh"
+
+
+# =============================================================================
+# Prompt
+# =============================================================================
+
+command -v starship &>/dev/null && _cached_eval starship init zsh
