@@ -30,11 +30,15 @@ chezmoi cd                 # cd into this source directory
 
 ## Tool Stack
 
-- **Shell**: Zsh + Oh-My-Zsh + sheldon (plugin manager) + starship (prompt)
+- **Shell**: Zsh + sheldon (plugin manager) + starship (prompt)
 - **Editor**: Neovim with LazyVim framework, plugins in `dot_config/nvim/lua/plugins/`
 - **Terminal**: Kitty
 - **Multiplexer**: Tmux
 - **Tool versions**: Managed by mise (`dot_config/mise/config.toml`)
+
+## Zsh Structure
+
+`dot_zshrc` is organised into sections: Environment → Completions → Functions → Plugins & Tool integrations → Prompt.
 
 ## Neovim Plugin Architecture
 
@@ -43,6 +47,8 @@ Custom plugins live in `dot_config/nvim/lua/plugins/`. LazyVim extras are declar
 ## Neovim Keybinding Rules
 
 When adding or modifying keybindings, always check for conflicts first:
+
 1. Scan all files in `dot_config/nvim/lua/plugins/` and `dot_config/nvim/lua/config/` for existing `keys` and `vim.keymap.set` definitions.
 2. Check LazyVim default keymaps — this config uses LazyVim, so many `<leader>` combos are already taken (see lazyvim.org/keymaps).
 3. Pick keys that are semantically related to nearby bindings (e.g., `<C-.>` next to `<C-,>` for related functionality).
+
