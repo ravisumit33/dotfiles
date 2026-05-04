@@ -28,9 +28,6 @@ github = "MichaelAquilina/zsh-you-should-use"
 [plugins.zsh-bat]
 github = "fdellwing/zsh-bat"
 
-[plugins.fzf-tab]
-github = "Aloxaf/fzf-tab"
-
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 apply = ["defer"]
@@ -38,6 +35,8 @@ apply = ["defer"]
 [plugins.git]
 github = "ohmyzsh/ohmyzsh"
 dir = "plugins/git"
+apply = ["defer"]
+
 
 # For example:
 #
