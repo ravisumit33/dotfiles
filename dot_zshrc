@@ -15,36 +15,25 @@ export LC_ALL=en_US.UTF-8
 
 # oh-my-zsh normally initialises the zsh completion system (compinit), which
 # defines compdef. Since we load only its git plugin via sheldon without the
-# framework, compdef is never defined and the plugin throws "command not found".
+# oh-my-zsh framework, compdef is never defined and the plugin throws "command not found".
 # A no-op stub is enough — we only need the aliases, not the completion bindings.
 compdef() {}
 
 
 # =============================================================================
-# Plugins
+# Functions
 # =============================================================================
 
-command -v sheldon &>/dev/null && eval "$(sheldon source)" # sheldon already caches
+source "$HOME/.config/zsh/functions.zsh"
 
 
 # =============================================================================
-# Tool integrations
+# Plugins & Tool integrations
 # =============================================================================
 
-# Cache eval output so we avoid a subprocess fork on every shell start.
-# Cache is invalidated automatically when the binary changes.
-_cached_eval() {
-  local cache="$HOME/.cache/zsh/${1:t}.zsh"
-  [[ ! -f $cache || "$(command -v $1)" -nt $cache ]] && { mkdir -p "${cache:h}"; "$@" > $cache }
-  source $cache
-}
-
+command -v sheldon &>/dev/null && _cached_eval --check "$HOME/.local/share/sheldon/plugins.lock" sheldon source
 command -v mise &>/dev/null && _cached_eval mise activate zsh
-
-if [[ ! -f "$HOME/.fzf.zsh" || "$(command -v fzf)" -nt "$HOME/.fzf.zsh" ]]; then
-  fzf --zsh > "$HOME/.fzf.zsh"
-fi
-source "$HOME/.fzf.zsh"
+command -v fzf &>/dev/null && _cached_eval fzf --zsh
 
 
 # =============================================================================
