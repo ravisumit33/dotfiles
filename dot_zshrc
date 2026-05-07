@@ -34,6 +34,7 @@ source "$HOME/.config/zsh/functions.zsh"
 command -v sheldon &>/dev/null && _cached_eval --check "$HOME/.local/share/sheldon/plugins.lock" sheldon source
 command -v mise &>/dev/null && _cached_eval mise activate zsh
 command -v fzf &>/dev/null && _cached_eval fzf --zsh
+command -v zoxide &>/dev/null && _cached_eval zoxide init zsh
 
 
 # =============================================================================
