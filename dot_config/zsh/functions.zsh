@@ -12,3 +12,9 @@ _cached_eval() {
   [[ ! -f $cache || "$invalidate" -nt $cache ]] && { mkdir -p "${cache:h}"; "$@" > $cache }
   source $cache
 }
+
+
+
+# Automatically set terminal tab title (https://github.com/kovidgoyal/kitty/issues/930#issuecomment-716118208)
+_set_tab_title() { print -Pn "\e]0;%~\a" }
+precmd_functions+=(_set_tab_title)
