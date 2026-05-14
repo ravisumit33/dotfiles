@@ -8,6 +8,8 @@ return {
 		{ auto_mode_key, "<cmd>ClaudeCode --enable-auto-mode<cr>", desc = "Claude Auto Mode", mode = { "n", "x" } },
 	},
 	opts = {
+		terminal_cmd = "claude --model opus",
+		focus_after_send = true,
 		terminal = {
 			snacks_win_opts = {
 				keys = {
