@@ -2,10 +2,6 @@
 # Environment
 # =============================================================================
 
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-[[ -d "$HOME/OpenSource/vcpkg" ]] && export VCPKG_ROOT="$HOME/OpenSource/vcpkg"
 [[ -n "$VIRTUAL_ENV" && ":$PATH:" != *":$VIRTUAL_ENV/bin:"* ]] && export PATH="$VIRTUAL_ENV/bin:$PATH"
 
 
@@ -18,13 +14,6 @@ export LC_ALL=en_US.UTF-8
 # oh-my-zsh framework, compdef is never defined and the plugin throws "command not found".
 # A no-op stub is enough — we only need the aliases, not the completion bindings.
 compdef() {}
-
-
-# =============================================================================
-# Functions
-# =============================================================================
-
-source "$HOME/.config/zsh/functions.zsh"
 
 
 # =============================================================================

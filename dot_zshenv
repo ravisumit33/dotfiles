@@ -1,4 +1,26 @@
+# =============================================================================
+# Environment
+# =============================================================================
+
 . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/.local/bin"
 export EDITOR="nvim"
 export VISUAL="nvim"
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+[[ -d "$HOME/OpenSource/vcpkg" ]] && export VCPKG_ROOT="$HOME/OpenSource/vcpkg"
+
+
+# =============================================================================
+# Functions
+# =============================================================================
+
+source "$HOME/.config/zsh/functions.zsh"
+
+
+# =============================================================================
+# Artifactory setup
+# =============================================================================
+
+[[ -f "$HOME/.config/zsh/artifactory.zsh" ]] && source "$HOME/.config/zsh/artifactory.zsh"
