@@ -8,7 +8,7 @@ Personal dotfiles managed with [chezmoi](https://www.chezmoi.io). Covers shell, 
 chezmoi init --apply https://github.com/ravisumit33/dotfiles
 ```
 
-You'll be prompted for a work directory path, work email, and SSH key during setup.
+You'll be prompted for various inputs during setup.
 
 ## Stack
 
