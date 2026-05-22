@@ -39,8 +39,9 @@ return {
           cycle = true,
           auto_close = true,
           follow = true,
+          focus = "list",
           layout = {
-            { preview = true },
+            preview = true,
             layout = {
               box = "horizontal",
               width = 0.8,
@@ -86,7 +87,6 @@ return {
         end
 
         Snacks.picker.explorer({
-          focus = file,
           ignored = is_ignored,
           hidden = is_hidden,
         })
