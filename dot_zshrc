@@ -27,6 +27,16 @@ command -v zoxide &>/dev/null && _cached_eval zoxide init zsh
 
 
 # =============================================================================
+# Key bindings
+# =============================================================================
+
+# Force emacs-style line editing. zsh otherwise auto-selects the vi keymap
+# because $EDITOR/$VISUAL contain "nvim", which makes Ctrl-A/Ctrl-E self-insert
+# and breaks the macOS-style cmd/option+arrow mappings defined in kitty.conf.
+bindkey -e
+
+
+# =============================================================================
 # Prompt
 # =============================================================================
 
