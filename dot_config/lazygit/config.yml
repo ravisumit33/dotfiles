@@ -1,0 +1,19 @@
+# lazygit config
+# Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+customCommands:
+  # Update ALL submodules to their tracked upstream branch (available from any panel)
+  - key: "U"
+    context: "global"
+    description: "Update all submodules to remote (recursive)"
+    command: "git submodule update --init --remote --recursive"
+    loadingText: "Updating all submodules to remote recursively..."
+    output: log
+
+  # Update only the SELECTED submodule to its tracked upstream branch (submodules panel)
+  - key: "U"
+    context: "submodules"
+    description: "Update selected submodule to remote (recursive)"
+    command: "git submodule update --init --remote --recursive -- '{{ .SelectedSubmodule.Path }}'"
+    loadingText: "Updating selected submodule to remote recursively..."
+    output: log
