@@ -8,7 +8,8 @@
     path = ~/.gitconfig-work
 
 [core]
-    pager = delta
+    # side-by-side view for git diff
+    pager = delta --side-by-side
 
 [interactive]
     diffFilter = delta --color-only
@@ -16,7 +17,6 @@
 [delta]
     navigate = true
     dark = true
-    side-by-side = true
     line-numbers = true
 
 [diff]

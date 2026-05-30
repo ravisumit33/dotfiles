@@ -1,8 +1,12 @@
 # lazygit config
 # Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
 
+git:
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never
+
 customCommands:
-  # Update ALL submodules to their tracked upstream branch (available from any panel)
   - key: "U"
     context: "global"
     description: "Update all submodules to remote (recursive)"
@@ -10,10 +14,23 @@ customCommands:
     loadingText: "Updating all submodules to remote recursively..."
     output: log
 
-  # Update only the SELECTED submodule to its tracked upstream branch (submodules panel)
   - key: "U"
     context: "submodules"
     description: "Update selected submodule to remote (recursive)"
     command: "git submodule update --init --remote --recursive -- '{{ .SelectedSubmodule.Path }}'"
     loadingText: "Updating selected submodule to remote recursively..."
     output: log
+
+  - key: "V"
+    context: "files"
+    description: "View diff in codediff.nvim"
+    command: |
+      f="$PWD/{{ .SelectedPath }}"
+      if [ -n "$NVIM" ]; then
+        nvim --server "$NVIM" --remote-expr "luaeval('require(\"utils.lazygit_codediff\").open(_A)', '$f')" >/dev/null
+      elif [ -n "$TMUX" ]; then
+        tmux new-window "nvim -c \"lua require('utils.lazygit_codediff').open([[$f]])\""
+      else
+        nvim -c "lua require('utils.lazygit_codediff').open([[$f]])"
+      fi
+    output: none # RPC/new-window branches above don't need lazygit's terminal (TTY).
