@@ -16,11 +16,21 @@ function M.open(path)
 	local lazygit_tab = vim.api.nvim_get_current_tabpage()
 	local is_dir = vim.fn.isdirectory(path) == 1
 
+	local conflicted = false
+	if not is_dir then
+		local dir = vim.fn.fnamemodify(path, ":h")
+		local unmerged = vim.fn.systemlist({ "git", "-C", dir, "ls-files", "-u", "--", path })
+		conflicted = vim.v.shell_error == 0 and #unmerged > 0
+	end
+
 	-- Throwaway tab to give codediff a usable current buffer.
 	if is_dir then
 		-- Folder: nothing to focus. Empty buffer + window-local cwd inside the folder.
 		vim.cmd("tabnew")
 		vim.cmd("lcd " .. vim.fn.fnameescape(path))
+	elseif conflicted then
+		-- Conflict: merge mode resolves the repo from the path itself, so an empty buffer.
+		vim.cmd("tabnew")
 	else
 		-- File: load it so codediff resolves the repo from it AND pre-focuses it.
 		vim.cmd("tabnew " .. vim.fn.fnameescape(path))
@@ -28,14 +38,23 @@ function M.open(path)
 	local throwaway_tab = vim.api.nvim_get_current_tabpage()
 	local throwaway_buf = vim.api.nvim_get_current_buf()
 
-	vim.cmd("CodeDiff")
-
-	-- Change the current tab from throwaway_tab so that throwaway_tab can be deleted
-	vim.api.nvim_set_current_tabpage(lazygit_tab)
+	if conflicted then
+		-- merge mode is SYNCHRONOUS: its tab is already open and focused.
+		vim.cmd("CodeDiff merge " .. vim.fn.fnameescape(vim.fn.resolve(path)))
+	else
+		-- explorer mode is ASYNC: we're still on the throwaway tab.
+		-- Leave the throwaway so it can be deleted.
+		vim.cmd("CodeDiff")
+		vim.api.nvim_set_current_tabpage(lazygit_tab)
+	end
 
 	-- Cleanup throwaway_tab
 	close_tab(throwaway_tab)
-	if is_dir and vim.api.nvim_buf_is_valid(throwaway_buf) and vim.api.nvim_buf_get_name(throwaway_buf) == "" then
+	if
+		(is_dir or conflicted)
+		and vim.api.nvim_buf_is_valid(throwaway_buf)
+		and vim.api.nvim_buf_get_name(throwaway_buf) == ""
+	then
 		pcall(vim.api.nvim_buf_delete, throwaway_buf, { force = true })
 	end
 
