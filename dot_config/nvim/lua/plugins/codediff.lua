@@ -1,19 +1,13 @@
 return {
 	{
 		"esmuellert/codediff.nvim",
-		config = function(_, opts)
-			require("codediff").setup(opts)
-			-- Requirement: word-level diff highlights need white fg for readability on dark tokyonight.
-			-- Problem: codediff resolves highlight groups by extracting only `bg`, then recreates the
-			-- groups itself — stripping any `fg` we set beforehand.
-			-- Solution: override the groups after setup() so our `fg` is the final value used for rendering.
-			vim.api.nvim_set_hl(0, "CodeDiffCharInsert", { bg = "#1f8c40", fg = "#ffffff" })
-			vim.api.nvim_set_hl(0, "CodeDiffCharDelete", { bg = "#a8253a", fg = "#ffffff" })
-		end,
 		opts = {
 			highlights = {
-				char_insert = "#1f8c40",
-				char_delete = "#a8253a",
+				-- GitHub-dark diff
+				line_insert = "#12261F",
+				line_delete = "#25191C",
+				char_insert = "#1E582E",
+				char_delete = "#7A2F2E",
 			},
 			diff = {
 				conflict_result_position = "center",
