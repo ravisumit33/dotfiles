@@ -21,6 +21,23 @@ customCommands:
     loadingText: "Updating selected submodule to remote recursively..."
     output: log
 
+  - key: "b"
+    context: "worktrees"
+    description: "Create worktree from existing branch"
+    prompts:
+      - type: "input"
+        title: "Branch to check out into new worktree"
+        key: "Branch"
+        suggestions:
+          preset: "branches"
+      - type: "input"
+        title: "New worktree path"
+        key: "Path"
+        initialValue: "{{ .Form.Branch }}"
+    command: "git worktree add '{{ .Form.Path }}' '{{ .Form.Branch }}'"
+    loadingText: "Adding worktree for existing branch..."
+    output: log
+
   - key: "V"
     context: "files"
     description: "View diff in codediff.nvim"
