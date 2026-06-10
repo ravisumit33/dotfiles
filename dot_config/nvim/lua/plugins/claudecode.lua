@@ -11,6 +11,7 @@ return {
 		terminal_cmd = "claude --model opus",
 		focus_after_send = true,
 		terminal = {
+			split_width_percentage = 0.35,
 			snacks_win_opts = {
 				keys = {
 					claude_hide = {
