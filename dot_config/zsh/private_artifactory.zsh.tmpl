@@ -6,7 +6,7 @@ _artifactory_env() {
   print -r -- {{ printf "export ARTIFACTORY_USER=%s" .artifactory.user | quote }}
   print -r -- {{ printf "export ARTIFACTORY_API_TOKEN=%s" .artifactory.apiToken | quote }}
   print -r -- "export NPM_AUTH=${(q)$(awk '/_auth/{print $3}' <<< $auth)}"
-  print -r -- "export NPM_EMAIL=${(q)$(awk '/email/{print $3}' <<< $auth)}"
+  print -r -- {{ printf "export NPM_EMAIL=%s" .work.email | quote }}
 }
 _cached_eval --check "$HOME/.config/zsh/artifactory.zsh" _artifactory_env
 {{- end }}
