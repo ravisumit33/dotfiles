@@ -1,0 +1,9 @@
+Host {{ .work.gitUrl }}
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/{{ .work.sshKey }}
+  IdentitiesOnly yes
+
+Host github.com
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/{{ .personal.sshKey }}
+  IdentitiesOnly yes

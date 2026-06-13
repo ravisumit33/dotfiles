@@ -1,7 +1,11 @@
+[data.personal]
+  sshKey = "{{ promptStringOnce . "personal.sshKey" "Enter the filename of your personal SSH private key in ~/.ssh }}"
+
 [data.work]
   dirname = "{{ promptStringOnce . "work.dirname" "Enter your work folder name inside $HOME (e.g. work)" }}"
   email   = "{{ promptStringOnce . "work.email" "Enter your work email" }}"
   sshKey  = "{{ promptStringOnce . "work.sshKey" "Enter the filename of your work SSH private key in ~/.ssh (e.g. id_ed25519_work)" }}"
+  gitUrl  = "{{ promptStringOnce . "work.gitUrl" "Enter your work git host" }}"
 
 [data.artifactory]
   npmAuthUrl = "{{ promptStringOnce . "artifactory.npmAuthUrl" "Enter the artifactory npm auth URL (leave blank to skip artifactory setup)" "" }}"
