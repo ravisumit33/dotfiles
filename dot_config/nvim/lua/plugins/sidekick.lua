@@ -3,6 +3,12 @@ return {
 		"folke/sidekick.nvim",
 		opts = {
 			cli = {
+				-- Sidekick's terminal is its own implementation (not Snacks.terminal)
+				-- and hardcodes wrap=false. Override it here to avoid unwanted
+				-- horizontal scroll from imprecise trackpad swipes.
+				win = {
+					wo = { wrap = true },
+				},
 				tools = {
 					copilot = {
 						cmd = {
