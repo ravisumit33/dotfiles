@@ -32,7 +32,11 @@ require("lazy").setup({
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = {
-    enabled = true, -- check for plugin updates periodically
+    -- Disabled: on startup this fired ~0.9s `git` update-checks across all
+    -- ~59 plugins, saturating the event loop for several seconds. Opening the
+    -- picker/grep in that window starved it ("stuck, then fine"). With
+    -- notify=false it never surfaced updates anyway — run `:Lazy` manually.
+    enabled = false,
     notify = false, -- notify on update
   }, -- automatically check for plugin updates
   performance = {
