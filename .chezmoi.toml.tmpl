@@ -1,5 +1,5 @@
 [data.personal]
-  sshKey = "{{ promptStringOnce . "personal.sshKey" "Enter the filename of your personal SSH private key in ~/.ssh }}"
+  sshKey = "{{ promptStringOnce . "personal.sshKey" "Enter the filename of your personal SSH private key in ~/.ssh" }}"
 
 [data.work]
   dirname = "{{ promptStringOnce . "work.dirname" "Enter your work folder name inside $HOME (e.g. work)" }}"

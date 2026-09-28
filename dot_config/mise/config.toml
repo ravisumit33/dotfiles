@@ -11,3 +11,6 @@ ripgrep = "latest"
 starship = "latest"
 tmux = "latest"
 zoxide = "latest"
+
+[settings.github]
+credential_command = "gh auth token --user ravisumit33"
