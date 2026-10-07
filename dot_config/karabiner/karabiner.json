@@ -1,0 +1,55 @@
+{
+  "profiles": [
+    {
+      "name": "Default profile",
+      "selected": true,
+      "virtual_hid_keyboard": {
+        "keyboard_type_v2": "ansi"
+      },
+      "complex_modifications": {
+        "rules": [
+          {
+            "description": "Caps Lock to Ctrl+Alt+Cmd",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": {
+                    "optional": ["any"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "left_control",
+                    "modifiers": ["left_option", "left_command"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Cmd+Tab cycles windows in the current AeroSpace workspace",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "tab",
+                  "modifiers": {
+                    "mandatory": ["command"],
+                    "optional": ["shift", "caps_lock"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "f18"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
