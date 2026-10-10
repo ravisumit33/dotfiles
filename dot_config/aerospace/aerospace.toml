@@ -144,6 +144,9 @@ gaps.outer.right = 0
 ctrl-alt-cmd-slash = 'layout tiles horizontal vertical'
 ctrl-alt-cmd-comma = 'layout accordion horizontal vertical'
 
+# See: https://nikitabobko.github.io/AeroSpace/commands#macos-native-fullscreen
+ctrl-alt-cmd-space = 'macos-native-fullscreen'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 ctrl-alt-cmd-h = 'focus left'
 ctrl-alt-cmd-j = 'focus down'
