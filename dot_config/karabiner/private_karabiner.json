@@ -23,7 +23,7 @@
             ]
           },
           {
-            "description": "Cmd+Tab cycles windows in the current AeroSpace workspace",
+            "description": "Cmd+Tab focuses the previous window; Cmd+Shift+Tab cycles backwards",
             "manipulators": [
               {
                 "from": {

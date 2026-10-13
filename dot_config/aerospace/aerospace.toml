@@ -242,7 +242,8 @@ ctrl-alt-cmd-shift-enter = 'focus-monitor --wrap-around next'
 ctrl-alt-cmd-shift-semicolon = 'mode service'
 
 # Karabiner maps Cmd+Tab to F18 and preserves Shift.
-f18 = 'focus --wrap-around dfs-next'
+# Cmd+Tab returns to the last focused window, including across workspaces.
+f18 = 'focus-back-and-forth'
 shift-f18 = 'focus --wrap-around dfs-prev'
 
 # 'service' binding mode declaration.
